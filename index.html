@@ -5,7 +5,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a0a0b;--card:#141416;--line:#2a2620;--gold:#d9bf8c;--rose:#e8b9c4;--tx:#f3eee6;--mut:#9b958a;--ok:#7fc99a;--ko:#e57f7f;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Inter,system-ui,sans-serif;overflow-x:hidden}
+*{box-sizing:border-box}html{overflow-x:hidden}body{max-width:100%;margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Inter,system-ui,sans-serif;overflow-x:hidden}
 h1,h2,h3,.brand{font-family:'Playfair Display',Georgia,serif;font-weight:700;margin:0}a{color:inherit;text-decoration:none}
 header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(10,10,11,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
 .brand{font-size:19px;letter-spacing:.12em;color:var(--gold)}.brand b{color:var(--rose)}
@@ -28,7 +28,7 @@ input,select{width:100%;background:#0d0d0e;border:1px solid var(--line);color:va
 .box{max-width:420px;margin:20px auto}.mut{color:var(--mut)}.sm{font-size:13px}.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:520px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--gold);font-weight:500}
 .stat{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold)}
 .sub{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;padding-bottom:4px}.sub a{white-space:nowrap;border:1px solid var(--line);padding:7px 14px;border-radius:99px;font-size:13px;color:var(--mut)}.sub a.on{background:var(--rose);color:#222;border-color:var(--rose)}
-#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--gold);color:#111;padding:11px 18px;border-radius:99px;font-weight:600;font-size:13px;opacity:0;pointer-events:none;transition:.3s;z-index:50;max-width:90vw;text-align:center}#toast.on{opacity:1}
+#toast{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--gold);color:#111;padding:11px 18px;border-radius:99px;font-weight:600;font-size:13px;opacity:0;pointer-events:none;transition:.3s;z-index:50;max-width:90vw;text-align:center}#toast.on{opacity:1}
 .draw{font-family:'Playfair Display',serif;font-size:28px;text-align:center;color:var(--rose);padding:22px 8px}footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
 </style></head><body>
 <header><a href="#accueil" class="brand">RIMHABY <b>CLUB</b></a><button class="burger" onclick="$('#nav').classList.toggle('open')">☰</button><nav id="nav"></nav></header>
@@ -39,6 +39,7 @@ const sb=supabase.createClient("https://jlnnlisowvbvwmndrvvl.supabase.co","sb_pu
 const $=s=>document.querySelector(s),esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const toast=m=>{const t=$("#toast");t.textContent=m;t.className="on";clearTimeout(toast.t);toast.t=setTimeout(()=>t.className="",3200)};
 const D=864e5;let S={u:null,p:null};
+window.addEventListener("error",e=>toast("Erreur : "+e.message));window.addEventListener("unhandledrejection",e=>toast("Erreur : "+((e.reason&&e.reason.message)||e.reason)));
 const isAct=c=>c.status==="active"&&new Date(c.ends_at)>new Date();
 const fd=d=>new Date(d).toLocaleDateString("fr-FR");
 const cdTxt=e=>{let d=new Date(e)-Date.now();if(d<=0)return"Terminé";let j=d/D|0,h=d%D/36e5|0,m=d%36e5/6e4|0,s=d%6e4/1e3|0;return`${j}j ${h}h ${m}m ${s}s`};
@@ -67,14 +68,22 @@ let mine=null;if(S.u){const r=await sb.from("entries").select("*").eq("contest_i
 const act=isAct(c),rules=(c.rules||[]).map(r=>`<li>${esc(r)}</li>`).join("");
 return`<a class="mut sm" href="#concours">← Retour</a><div class="card" style="margin-top:12px"><span class="em">🎁</span><h1 style="font-size:30px">${esc(c.title)}</h1><p style="color:var(--gold)">🎁 ${esc(c.prize)}</p>${c.description?`<p>${esc(c.description)}</p>`:""}${act?`<div class="cd" data-end="${c.ends_at}">${cdTxt(c.ends_at)}</div>`:'<span class="tag">Terminé</span>'}</div>
 ${rules?`<h2>Règles et conditions</h2><div class="card"><ol>${rules}</ol><p class="sm mut">Une participation par personne. Dossier vérifié par l’équipe avant le tirage.</p></div>`:""}
-${act?`<h2>Participer</h2><div class="card">${!S.u?'<p>Connecte-toi pour participer.</p><a class="btn" href="#connexion">Se connecter</a>':mine?`<p>Participation envoyée : ${stTag(mine.status)}</p>${mine.reject_reason?`<p class="sm" style="color:var(--ko)">Motif : ${esc(mine.reject_reason)}</p>`:""}`:`<label>Capture d’écran (JPG, PNG ou WebP, 5 Mo max)</label><input type="file" id="pf" accept="image/jpeg,image/png,image/webp"><label><input type="checkbox" id="pc" style="width:auto;margin-right:8px">J’accepte le règlement et le traitement de mes données.</label><br><button class="btn" id="pb" onclick="part(${c.id})">Envoyer ma participation</button>`}</div>`:""}`}
-async function part(cid){const f=$("#pf").files[0];if(!f)return toast("Ajoute une capture d’écran");if(!$("#pc").checked)return toast("Accepte le règlement");
-const ext={"image/jpeg":"jpg","image/png":"png","image/webp":"webp"}[f.type];if(!ext)return toast("Format non accepté");if(f.size>5242880)return toast("Fichier trop lourd (5 Mo max)");
-$("#pb").disabled=true;const path=`${S.u.id}/${cid}-${Date.now()}.${ext}`;
-const up=await sb.storage.from("proofs").upload(path,f,{contentType:f.type});if(up.error){$("#pb").disabled=false;return toast(up.error.message)}
+${act?`<h2>Participer</h2><div class="card">${!S.u?'<p>Connecte-toi pour participer.</p><a class="btn" href="#connexion">Se connecter</a>':mine?`<p>Participation envoyée : ${stTag(mine.status)}</p>${mine.reject_reason?`<p class="sm" style="color:var(--ko)">Motif : ${esc(mine.reject_reason)}</p>`:""}`:`<label>Capture d’écran (JPG, PNG ou WebP, 5 Mo max)</label><input type="file" id="pf" accept="image/jpeg,image/png,image/webp" onchange="pfc(this)"><label><input type="checkbox" id="pc" style="width:auto;margin-right:8px">J’accepte le règlement et le traitement de mes données.</label><br><button class="btn" id="pb" onclick="part(${c.id})">Envoyer ma participation</button><p class="sm" id="pmsg" style="color:var(--gold);margin-top:10px"></p>`}</div>`:""}`}
+const say=m=>{const e=$("#pmsg");if(e)e.textContent=m;toast(m)};
+function pfc(i){const f=i.files[0],e=$("#pmsg");if(e)e.textContent=f?"Fichier choisi : "+f.name+" ("+Math.round(f.size/1024)+" Ko)":""}
+async function part(cid){try{
+const f=$("#pf").files[0];if(!f)return say("Ajoute d’abord une capture d’écran");if(!$("#pc").checked)return say("Coche la case pour accepter le règlement");
+const m={"image/jpeg":"jpg","image/png":"png","image/webp":"webp"},ct2={jpg:"image/jpeg",png:"image/png",webp:"image/webp"};
+let ext=m[f.type];if(!ext){let n=(f.name.split(".").pop()||"").toLowerCase();if(n=="jpeg")n="jpg";if(ct2[n])ext=n}
+if(!ext)return say("Format non accepté ("+(f.type||"inconnu")+") : utilise une capture PNG ou JPG");
+if(f.size>5242880)return say("Fichier trop lourd (5 Mo max)");
+$("#pb").disabled=true;say("Envoi en cours…");
+const path=S.u.id+"/"+cid+"-"+Date.now()+"."+ext;
+const up=await sb.storage.from("proofs").upload(path,f,{contentType:ct2[ext]});if(up.error){$("#pb").disabled=false;return say("Téléversement refusé : "+up.error.message)}
 const r=await sb.from("entries").insert({contest_id:cid,user_id:S.u.id,proof_path:path});
-if(r.error){$("#pb").disabled=false;return toast(r.error.code=="23505"?"Tu participes déjà à ce concours":r.error.message)}
-toast("Participation envoyée ✓");go()}
+if(r.error){$("#pb").disabled=false;return say(r.error.code=="23505"?"Tu participes déjà à ce concours":"Enregistrement refusé : "+r.error.message)}
+toast("Participation envoyée ✓");go()
+}catch(e){const b=$("#pb");if(b)b.disabled=false;say("Erreur : "+(e.message||e))}}
 function pAuth(){if(S.u)return'<div class="box card"><p>Tu es connectée.</p><a class="btn" href="#profil">Mon profil</a></div>';
 return`<div class="box card"><h2 style="margin-top:0">Connexion</h2><div class="tabs"><button class="on" id="t1" onclick="tab(1)">Connexion</button><button id="t2" onclick="tab(2)">Inscription</button></div><div id="nm" style="display:none"><label>Nom complet</label><input id="an" autocomplete="name"></div><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Mot de passe (8 caractères min.)</label><input id="ap" type="password" autocomplete="current-password"><button class="btn" style="width:100%" id="ab" onclick="auth()">Continuer</button><p class="sm mut">Tes données sont utilisées uniquement pour gérer les concours.</p></div>`}
 let mode=1;function tab(n){mode=n;$("#t1").className=n==1?"on":"";$("#t2").className=n==2?"on":"";$("#nm").style.display=n==2?"block":"none"}
