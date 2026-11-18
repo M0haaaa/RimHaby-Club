@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RIMHABY CLUB · Nouvelle interface</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09090a;--ink:#f4ede4;--mut:#a39a8e;--gold:#d9bf8c;--rose:#e8b9c4;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;overflow-x:hidden;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden;max-width:100%}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif;font-weight:500;margin:0}
+#bar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--gold),var(--rose));z-index:70}
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(#09090aee,#09090a00)}
+.brand{letter-spacing:.2em;color:var(--gold);font-size:15px}.brand b{color:var(--rose);font-weight:500}
+.pill{border:1px solid #d9bf8c55;color:var(--gold);padding:8px 16px;border-radius:99px;font-size:13px;background:#0009;backdrop-filter:blur(8px);cursor:pointer;font-family:inherit}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:90px 22px 50px;position:relative;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(50px);opacity:.55;transform:translateY(calc(var(--sy,0)*var(--k)*1px))}
+.o1{width:240px;height:240px;background:#d9bf8c66;top:12%;left:-70px;--k:-.15;animation:dr 11s ease-in-out infinite alternate}
+.o2{width:290px;height:290px;background:#e8b9c466;bottom:6%;right:-90px;--k:-.3;animation:dr 14s ease-in-out infinite alternate-reverse}
+.tag{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--rose);border:1px solid #e8b9c455;padding:6px 14px;border-radius:99px;position:relative}
+h1{font-size:clamp(40px,12vw,76px);line-height:1.05;margin:22px 0 16px;position:relative}
+h1 .w{display:inline-block;opacity:0;transform:translateY(30px) rotate(3deg);animation:up .9s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i)*.14s + .2s)}
+h1 em{font-style:italic;background:linear-gradient(90deg,var(--gold),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.1em}
+@keyframes up{to{opacity:1;transform:none}}
+.sub{color:var(--mut);max-width:420px;position:relative}
+.cta{margin-top:26px;border:0;cursor:pointer;background:linear-gradient(135deg,#ead3a4,#b8935a);color:#1a140a;font:600 15px Inter,sans-serif;padding:14px 28px;border-radius:99px;box-shadow:0 10px 40px #d9bf8c33;transition:.3s;position:relative}.cta:active{transform:scale(.96)}
+.cue{position:absolute;bottom:20px;color:var(--mut);font-size:11px;letter-spacing:.2em}
+.cue i{display:block;width:1px;height:34px;margin:8px auto 0;background:linear-gradient(var(--gold),transparent);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes dr{to{translate:40px -34px}}
+.sp{position:absolute;border-radius:50%;background:#f3dcae;box-shadow:0 0 8px #d9bf8c;opacity:0;animation:sp linear infinite}@keyframes sp{10%{opacity:.9}90%{opacity:.6}100%{transform:translateY(-60vh);opacity:0}}
+.hero h1,.hero .sub{translate:0 calc(var(--sy,0)*-.12px)}.hero h1,.hero .sub,.hero .cta,.hero .tag{opacity:max(0,calc(1 - var(--sy,0)/450))}
+.stats{display:flex;justify-content:space-around;padding:30px 12px;border-block:1px solid #d9bf8c33;text-align:center}.stats b{display:block;font:500 clamp(30px,9vw,44px) 'Playfair Display',serif;color:var(--gold)}.stats span{color:var(--mut);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.sec{padding:70px 0 30px}.sec h2{font-size:clamp(30px,8vw,46px);padding:0 22px;color:var(--gold)}
+.lead{padding:0 22px;color:var(--mut);margin:8px 0 26px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}.rv.in{opacity:1;transform:none}
+.track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 22px 30px;scrollbar-width:none}.track::-webkit-scrollbar{display:none}
+.niche{flex:0 0 74vw;max-width:310px;scroll-snap-align:center;cursor:pointer;perspective:800px}
+.arch{height:380px;border-radius:155px 155px 18px 18px;border:1px solid #d9bf8c66;background:radial-gradient(ellipse at 50% 30%,#f1ccd6 0,#d9a1b0 45%,#8d5a6a 100%);box-shadow:inset 0 0 60px #0006,0 20px 50px #0008;position:relative;display:flex;align-items:center;justify-content:center;transition:transform .2s ease-out}
+.arch:after{content:"";position:absolute;left:8%;right:8%;bottom:0;height:12px;background:linear-gradient(#f4e7cf,#b8935a);border-radius:6px 6px 0 0}
+.arch{overflow:hidden}.arch:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,#fff6 50%,transparent 65%);transform:translateX(-120%);animation:sw 5s ease-in-out infinite;pointer-events:none;z-index:2}@keyframes sw{60%,100%{transform:translateX(120%)}}
+.arch svg{width:62%;filter:drop-shadow(0 18px 18px #0007);animation:fl 4.5s ease-in-out infinite;margin-bottom:20px}
+@keyframes fl{50%{transform:translateY(-12px)}}
+.meta{padding:16px 6px}.meta h3{font-size:22px}.meta p{color:var(--mut);margin:4px 0 10px}
+.chip{display:inline-block;font-size:12px;color:var(--gold);border:1px solid #d9bf8c55;border-radius:99px;padding:3px 12px}
+.mq{overflow:hidden;border-block:1px solid #d9bf8c33;padding:18px 0;margin:26px 0}
+.mq div{display:flex;gap:38px;width:max-content;animation:mq 26s linear infinite;font-family:'Playfair Display',serif;font-size:22px;color:var(--gold)}
+.mq em{color:var(--rose)}@keyframes mq{to{transform:translateX(-50%)}}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:40px 22px 50px}
+#ov{position:fixed;inset:0;z-index:80;background:radial-gradient(ellipse at 50% 0,#3a1f2a,#09090a 62%);overflow-y:auto;clip-path:circle(0 at 50% 50%);visibility:hidden;transition:clip-path .75s cubic-bezier(.7,0,.2,1),visibility 0s .75s;padding:calc(70px + env(safe-area-inset-top,0px)) 22px 50px}
+#ov.on{visibility:visible;transition:clip-path .75s cubic-bezier(.7,0,.2,1),visibility 0s}
+#x{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:16px;width:46px;height:46px;border-radius:50%;border:1px solid #d9bf8c88;background:#000a;color:var(--gold);font-size:20px;cursor:pointer;z-index:90;transform:rotate(-90deg) scale(0);transition:transform .5s .35s cubic-bezier(.3,1.5,.5,1)}
+#ov.on #x{transform:none}
+#oc>*{opacity:0;transform:translateY(22px);transition:.6s}#ov.on #oc>*{opacity:1;transform:none}
+#ov.on #oc>:nth-child(1){transition-delay:.35s}#ov.on #oc>:nth-child(2){transition-delay:.45s}#ov.on #oc>:nth-child(3){transition-delay:.55s}#ov.on #oc>:nth-child(4){transition-delay:.65s}#ov.on #oc>:nth-child(5){transition-delay:.75s}
+.stage{height:270px;display:flex;justify-content:center;align-items:center;perspective:700px;touch-action:pan-y;cursor:grab;position:relative;user-select:none}
+.stage:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at calc(50% + var(--gx,0)*1px) 42%,#e8b9c455,transparent 58%);pointer-events:none}
+.obj{position:relative;width:170px;height:210px;transform-style:preserve-3d;will-change:transform}.ly{position:absolute;inset:0}.ly svg{width:100%;height:100%}
+.gs{position:absolute;bottom:6px;left:50%;width:150px;height:22px;border-radius:50%;background:radial-gradient(#000c,transparent 70%);transform:translateX(-50%)}
+.hint{text-align:center;color:var(--mut);font-size:12px;margin-top:-6px}
+#oc h2{font-size:34px;color:var(--ink);padding:0;margin-top:14px}.pz{color:var(--gold);margin:4px 0}
+.ring{display:flex;gap:18px;align-items:center;margin:22px 0}
+.ring svg{width:110px;height:110px;transform:rotate(-90deg);flex:none}.ring circle{fill:none;stroke-width:6}
+.rt{color:var(--rose);font-family:'Playfair Display',serif;font-size:24px}
+ol{padding-left:20px;color:var(--mut)}
+.cf{position:fixed;top:-14px;width:8px;height:14px;z-index:99;animation:fall linear forwards}@keyframes fall{to{transform:translateY(106vh) rotate(720deg);opacity:.2}}
+#toast{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--gold);color:#111;padding:11px 18px;border-radius:99px;font-weight:600;font-size:13px;opacity:0;pointer-events:none;transition:.3s;z-index:99;max-width:90vw;text-align:center}#toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,h1 .w,#oc>*{opacity:1;transform:none}}
+</style></head><body>
+<div id="bar"></div>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3dcae"/><stop offset="1" stop-color="#b8935a"/></linearGradient></defs></svg>
+<header><div class="brand serif">RIMHABY <b>CLUB</b></div><button class="pill" onclick="tt('Prototype : la connexion sera branchée à Supabase')">Connexion</button></header>
+<section class="hero"><div class="orb o1"></div><div class="orb o2"></div>
+<span class="tag">Prototype · données fictives</span>
+<h1><span class="w" style="--i:0">Gagnez</span> <span class="w" style="--i:1">avec</span> <span class="w" style="--i:2"><em>Rimhaby</em></span></h1>
+<p class="sub">Des concours élégants, des lots d’exception et des tirages au sort transparents, rien que pour la communauté.</p>
+<button class="cta" onclick="document.getElementById('vitrines').scrollIntoView()">Découvrir les vitrines</button>
+<div class="cue">DÉFILE<i></i></div></section>
+<section class="stats rv"><div><b data-n="1280">0</b><span>participantes</span></div><div><b data-n="42">0</b><span>gagnantes</span></div><div><b data-n="18">0</b><span>concours</span></div></section>
+<section class="sec" id="vitrines"><h2 class="rv">Les vitrines</h2><p class="lead rv">Fais glisser, puis touche un lot pour entrer dans sa vitrine.</p><div class="track" id="tr"></div></section>
+<section class="sec"><h2 class="rv">Elles ont gagné</h2><div class="mq rv"><div id="mq"></div></div><div style="text-align:center"><button class="cta rv" onclick="conf()">✦ Voir un tirage</button></div></section>
+<footer>© RIMHABY CLUB · Prototype de design</footer>
+<div id="ov"><button id="x" aria-label="Fermer" onclick="closeC()">✕</button><div id="oc"></div></div><div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),ov=$("#ov"),D=864e5;
+const P={bag:'<rect x="22" y="44" width="56" height="60" rx="8" fill="url(#g)"/><path d="M36 44V32a14 14 0 0 1 28 0v12" fill="none" stroke="url(#g)" stroke-width="5"/>',
+ring:'<circle cx="50" cy="72" r="26" fill="none" stroke="url(#g)" stroke-width="8"/><path d="M40 38l10-14 10 14-10 12z" fill="url(#g)"/>',
+perf:'<rect x="30" y="52" width="40" height="52" rx="12" fill="url(#g)"/><rect x="42" y="36" width="16" height="16" rx="3" fill="#e8b9c4"/><rect x="36" y="24" width="28" height="12" rx="4" fill="url(#g)"/>'};
+const ico=k=>'<svg viewBox="0 0 100 120">'+P[k]+'</svg>';
+const lay=k=>Array.from({length:9},(_,i)=>'<div class="ly" style="transform:translateZ('+(i-4)*3+'px);filter:brightness('+(.55+i*.06)+')">'+ico(k)+'</div>').join("");
+const C=[{t:"Sac signature",p:"Sac de luxe + 200 000 MRU",d:3,tot:7,k:"bag",r:["Suivre @rimhaby","Partager en story","Envoyer une capture d’écran"]},
+{t:"Parure en or",p:"Parure de bijoux plaqués or",d:9,tot:14,k:"ring",r:["Suivre @rimhaby","Identifier 2 amies","Envoyer une capture d’écran"]},
+{t:"Coffret parfum",p:"Parfum oriental 100 ml",d:14,tot:14,k:"perf",r:["Suivre @rimhaby","Aimer la vidéo","Envoyer une capture d’écran"]}];
+const E=C.map(c=>Date.now()+c.d*D+5e6);let cur=0,ox=0,oy=0,rot=0;
+const fmt=r=>{const d=r/D|0,h=r%D/36e5|0,m=r%36e5/6e4|0,s=r%6e4/1e3|0;return d+"j "+h+"h "+m+"m "+s+"s"};
+function tt(m){const t=$("#toast");t.textContent=m;t.className="on";clearTimeout(tt.t);tt.t=setTimeout(()=>t.className="",2800)}
+$("#tr").innerHTML=C.map((c,i)=>'<div class="niche rv" style="--d:'+i*.12+'s" onclick="openC('+i+',event)"><div class="arch">'+ico(c.k)+'</div><div class="meta"><h3>'+c.t+'</h3><p>'+c.p+'</p><span class="chip">Fin dans '+c.d+' jours</span></div></div>').join("");
+const W=[["Mariem S.","Abaya brodée"],["Aïchetou B.","Parfum oriental"],["Khadija O.","Sac de luxe"],["Salka B.","Coffret beauté"],["Fatimetou M.","Parure en or"]];
+const wl=W.map(w=>"<span>🏆 "+w[0]+" <em>"+w[1]+"</em></span>").join("");$("#mq").innerHTML=wl+wl;
+document.querySelectorAll(".niche").forEach(n=>{const a=n.firstChild;n.onpointermove=e=>{const b=n.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;a.style.transform="rotateY("+x*14+"deg) rotateX("+-y*10+"deg)"};n.onpointerleave=()=>a.style.transform=""});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".rv").forEach(e=>io.observe(e));
+let vel=0,dr=0,raf=0;
+function spin(s,o,g){cancelAnimationFrame(raf);let p=performance.now();(function f(n){if(!ov.classList.contains("on"))return;const k=Math.min(3,(n-p)/16.67||1);p=n;if(!dr){if(Math.abs(vel)<4){const tg=Math.round(rot/360)*360+Math.sin(n/900)*5;vel+=(tg-rot)*.012*k;vel*=Math.pow(.93,k)}else vel*=Math.pow(.975,k);rot+=vel*k}o.style.transform="rotateY("+rot+"deg)";g.style.transform="translateX(-50%) scaleX("+(.55+.45*Math.abs(Math.cos(rot*Math.PI/180)))+")";s.style.setProperty("--gx",Math.sin(rot*Math.PI/180)*70);raf=requestAnimationFrame(f)})(p)}
+(function(){const h=$(".hero");for(let i=0;i<22;i++){const s=document.createElement("i");s.className="sp";const z=2+Math.random()*3;s.style.cssText="left:"+Math.random()*100+"%;top:"+(40+Math.random()*60)+"%;width:"+z+"px;height:"+z+"px;animation-duration:"+(6+Math.random()*8)+"s;animation-delay:"+Math.random()*-10+"s";h.appendChild(s)}})();
+const io2=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;io2.unobserve(e.target);const n=+e.target.dataset.n,t0=performance.now();(function f(t){const p=Math.min(1,(t-t0)/1600);e.target.textContent=Math.round(n*(1-Math.pow(1-p,3))).toLocaleString("fr-FR");if(p<1)requestAnimationFrame(f)})(t0)}),{threshold:.6});document.querySelectorAll("[data-n]").forEach(e=>io2.observe(e));
+let tk=0;addEventListener("scroll",()=>{if(tk)return;tk=requestAnimationFrame(()=>{tk=0;const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;document.documentElement.style.setProperty("--sy",y);$("#bar").style.width=(h>0?y/h*100:0)+"%"})},{passive:true});
+function openC(i,e){cur=i;const c=C[i];ox=e.clientX||innerWidth/2;oy=e.clientY||innerHeight/2;rot=0;
+$("#oc").innerHTML='<div class="stage"><div class="obj">'+lay(c.k)+'</div><div class="gs"></div></div><div class="hint">↔ Lance-le d’un geste, il continue tout seul</div><div><h2>'+c.t+'</h2><p class="pz">🎁 '+c.p+'</p></div><div class="ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" stroke="#ffffff22"/><circle id="rc" cx="60" cy="60" r="52" stroke="url(#g)" stroke-linecap="round" stroke-dasharray="327" stroke-dashoffset="0" style="transition:stroke-dashoffset 1s"/></svg><div><div style="color:var(--mut);font-size:12px">TEMPS RESTANT</div><div class="rt" id="rt"></div></div></div><div><h3 style="color:var(--gold)">Règles</h3><ol>'+c.r.map(x=>"<li>"+x+"</li>").join("")+'</ol><button class="cta" onclick="tt(\'Prototype : la participation sera branchée à Supabase\')">Participer</button></div>';
+ov.style.clipPath="circle(0px at "+ox+"px "+oy+"px)";ov.classList.add("on");document.body.style.overflow="hidden";ov.scrollTop=0;
+requestAnimationFrame(()=>requestAnimationFrame(()=>ov.style.clipPath="circle(150% at "+ox+"px "+oy+"px)"));
+const s=$(".stage"),o=s.firstChild,g=s.lastChild;let sx=0,lt=0;vel=0;dr=0;s.onpointerdown=e=>{dr=1;sx=e.clientX;lt=performance.now();vel=0;s.setPointerCapture(e.pointerId)};s.onpointermove=e=>{if(!dr)return;const n=performance.now(),dx=(e.clientX-sx)*.8,dt=Math.max(8,n-lt);rot+=dx;vel=Math.max(-60,Math.min(60,vel*.6+dx/dt*16.67*.4));sx=e.clientX;lt=n};s.onpointerup=s.onpointercancel=()=>{dr=0;if(performance.now()-lt>90)vel=0};spin(s,o,g);tick()}
+function closeC(){ov.style.clipPath="circle(0px at "+ox+"px "+oy+"px)";ov.classList.remove("on");document.body.style.overflow=""}
+function tick(){const r=Math.max(0,E[cur]-Date.now()),f=Math.min(1,r/(C[cur].tot*D)),a=$("#rc"),b=$("#rt");if(a)a.style.strokeDashoffset=327*(1-f);if(b)b.textContent=fmt(r)}
+setInterval(()=>{if(ov.classList.contains("on"))tick()},1000);
+addEventListener("keydown",e=>{if(e.key=="Escape")closeC()});
+function conf(){for(let i=0;i<46;i++){const s=document.createElement("i");s.className="cf";s.style.cssText="left:"+Math.random()*100+"vw;background:"+(i%2?"#d9bf8c":"#e8b9c4")+";animation-duration:"+(2+Math.random()*2)+"s;animation-delay:"+Math.random()*.6+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),4800)}tt("Félicitations à la gagnante ✦")}
+</script></body></html>
