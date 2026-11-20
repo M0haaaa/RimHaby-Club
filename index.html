@@ -1,135 +1,108 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RIMHABY CLUB</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>RIMHABY CLUB · Galerie</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0a0b;--card:#141416;--line:#2a2620;--gold:#d9bf8c;--rose:#e8b9c4;--tx:#f3eee6;--mut:#9b958a;--ok:#7fc99a;--ko:#e57f7f;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-*{box-sizing:border-box}html{overflow-x:hidden}body{max-width:100%;margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 Inter,system-ui,sans-serif;overflow-x:hidden}
-h1,h2,h3,.brand{font-family:'Playfair Display',Georgia,serif;font-weight:700;margin:0}a{color:inherit;text-decoration:none}
-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(10,10,11,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
-.brand{font-size:19px;letter-spacing:.12em;color:var(--gold)}.brand b{color:var(--rose)}
-nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--card);border-bottom:1px solid var(--line);padding:8px 16px}nav.open{display:block}nav a{display:block;padding:11px 0;border-bottom:1px solid var(--line)}nav a.on{color:var(--gold)}
-.burger{background:none;border:1px solid var(--line);color:var(--gold);border-radius:10px;padding:7px 12px;font-size:18px}
-@media(min-width:800px){.burger{display:none}nav{display:flex!important;position:static;background:none;border:0;padding:0;gap:22px}nav a{border:0;padding:0}}
-main{max-width:1000px;margin:0 auto;padding:20px 16px 60px;animation:in .5s ease}@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.hero{text-align:center;padding:44px 12px 30px;background:radial-gradient(ellipse at 50% 0,rgba(232,185,196,.18),transparent 65%)}
-.hero h1{font-size:clamp(30px,8vw,52px);line-height:1.15}.hero h1 span{background:linear-gradient(90deg,var(--gold),var(--rose));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{color:var(--mut);max-width:520px;margin:14px auto 22px}
-.btn{display:inline-block;border:0;cursor:pointer;background:linear-gradient(135deg,var(--gold),#b99a5f);color:#16120b;font-weight:600;padding:12px 22px;border-radius:999px;font-size:14px}
-.btn.o{background:none;border:1px solid var(--gold);color:var(--gold)}.btn.s{padding:7px 14px;font-size:12px}.btn.r{background:var(--ko);color:#200}.btn.g{background:var(--ok);color:#012}
-h2{font-size:26px;margin:30px 0 14px;color:var(--gold)}.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}a.card:hover{border-color:var(--gold)}
-.em{font-size:42px;display:block}.tag{display:inline-block;font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}
-.tag.ok{color:var(--ok);border-color:var(--ok)}.tag.ko{color:var(--ko);border-color:var(--ko)}.tag.wa{color:var(--gold);border-color:var(--gold)}
-.cd{font-family:'Playfair Display',serif;color:var(--rose);font-size:18px;margin-top:8px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}.tabs button{background:none;border:1px solid var(--line);color:var(--mut);border-radius:99px;padding:8px 16px;cursor:pointer}.tabs button.on{background:var(--gold);color:#111;border-color:var(--gold)}
-input,select{width:100%;background:#0d0d0e;border:1px solid var(--line);color:var(--tx);border-radius:12px;padding:12px;font:inherit;margin:6px 0 12px}label{font-size:13px;color:var(--mut)}
-.box{max-width:420px;margin:20px auto}.mut{color:var(--mut)}.sm{font-size:13px}.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:520px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);font-size:13px}th{color:var(--gold);font-weight:500}
-.stat{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold)}
-.sub{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.sub a{white-space:nowrap;border:1px solid var(--line);padding:7px 14px;border-radius:99px;font-size:13px;color:var(--mut)}.sub a.on{background:var(--rose);color:#222;border-color:var(--rose)}
-#toast{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--gold);color:#111;padding:11px 18px;border-radius:99px;font-weight:600;font-size:13px;opacity:0;pointer-events:none;transition:.3s;z-index:50;max-width:90vw;text-align:center}#toast.on{opacity:1}
-.draw{font-family:'Playfair Display',serif;font-size:28px;text-align:center;color:var(--rose);padding:22px 8px}footer{text-align:center;color:var(--mut);font-size:12px;padding:24px}
-.gal{border:1px solid var(--gold);color:var(--gold);border-radius:99px;padding:6px 14px;font-size:13px;margin-left:auto;margin-right:10px}
+:root{--gold:#d9bf8c;--rose:#e8b9c4;--ink:#1a1416;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:#070607;font:14px Inter,system-ui,sans-serif;color:#f4ede4;overscroll-behavior:none;touch-action:none}
+#vp{position:fixed;inset:0;perspective:720px;touch-action:none;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#2b2024,#050405 75%)}
+#vp:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 35%,#000b 100%)}
+#w{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.p{position:absolute}
+.wl,.wr{top:50%;width:4900px;height:560px;margin-top:-280px;background:linear-gradient(0deg,#1c1618 0 16px,#cdbfa8 16px 19px,transparent 19px),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .4 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(var(--a),#ece5db 0,#ece5db 30%,#b9b0a5 70%,#3a3236 100%)}
+.wl{--a:90deg;left:50%;transform-origin:0 50%;transform:translateX(-450px) rotateY(90deg) translateX(-1200px)}
+.wr{--a:270deg;right:50%;transform-origin:100% 50%;transform:translateX(450px) rotateY(-90deg) translateX(1200px)}
+.fl,.ce{left:50%;top:50%;width:900px;height:4900px;margin-left:-450px;transform-origin:50% 0}
+.fl{transform:translateY(280px) rotateX(-90deg) translateY(-1200px)}
+.ce{transform:translateY(-280px) rotateX(-90deg) translateY(-1200px)}
+.ew{left:50%;top:50%;width:900px;height:560px;margin:-280px 0 0 -450px;transform:translateZ(-3700px);background:linear-gradient(#2a2226,#141012)}
+.fr{left:50%;top:50%;width:340px;height:450px;margin:-225px 0 0 -170px;padding:14px;background:linear-gradient(135deg,#f6e2b8,#a8814a 50%,#e8c98a);box-shadow:0 30px 60px #0009;border-radius:3px}
+.pt{position:relative;width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:inset 0 0 40px #000a}
+.pt svg{width:58%}.pt:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,#ffffff22 50%,transparent 60%)}
+.gl{position:absolute;left:-90px;right:-90px;top:-150px;bottom:-70px;background:radial-gradient(ellipse at 50% 0,#ffecc8bb,transparent 62%);opacity:var(--l,.1);pointer-events:none;z-index:-1}
+.lp{position:absolute;left:25%;right:25%;top:-22px;height:7px;border-radius:4px;background:linear-gradient(#f6e2b8,#8a6a45);box-shadow:0 0 14px #ffe3a8}
+.cap{position:absolute;left:-20px;right:-20px;top:100%;margin-top:28px;text-align:center;color:var(--ink);opacity:var(--t,0);transform:translateY(calc((1 - var(--t,0))*14px))}
+.cap small{display:block;color:#8a6a45;letter-spacing:.3em;font-size:11px}
+.cap b{display:block;font:600 24px 'Playfair Display',Georgia,serif;letter-spacing:.08em;text-transform:uppercase}
+.cap i{display:block;font-style:normal;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a86a7e;opacity:0;transition:opacity .5s}.near .cap i{opacity:1}
+.hud{position:fixed;z-index:20;pointer-events:none}
+#br{top:calc(14px + env(safe-area-inset-top,0px));left:18px;letter-spacing:.22em;color:var(--gold);font:500 14px 'Playfair Display',serif}
+#hint{bottom:calc(92px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#f4ede4cc;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:opacity .8s}
+#pg{right:12px;top:50%;height:120px;width:2px;margin-top:-60px;background:#ffffff33}#pg i{display:block;width:100%;background:var(--gold);height:0}
+#md{position:fixed;left:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;border:1px solid #d9bf8c66;background:#000a;color:var(--gold);border-radius:99px;padding:8px 14px;font:12px Inter,sans-serif;cursor:pointer}
+#lite{display:none;position:fixed;inset:0;overflow:auto;touch-action:pan-y;padding:70px 20px 90px;background:#0a0809}
+#lite a{display:block;margin-bottom:14px;padding:22px;border-radius:18px;border:1px solid #d9bf8c55;background:var(--bg);color:#fff;text-decoration:none;font:500 24px 'Playfair Display',serif}
+body.lite #lite{display:block}body.lite #vp,body.lite #pg,body.lite #hint{display:none}
+#iris{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;clip-path:circle(0 at 50% 50%);visibility:hidden;transition:clip-path .9s cubic-bezier(.7,0,.2,1)}
+#iris.on{visibility:visible}#iris div{font:500 44px 'Playfair Display',serif;color:#fff;text-shadow:0 4px 30px #000;opacity:0;transition:opacity .5s .4s}#iris.on div{opacity:1}
 </style></head><body>
-<header><a href="#accueil" class="brand">RIMHABY <b>CLUB</b></a><a href="galerie.html" class="gal">✦ Galerie</a><button class="burger" onclick="$('#nav').classList.toggle('open')">☰</button><nav id="nav"></nav></header>
-<main id="app"><p class="mut">Chargement…</p></main><footer>© RIMHABY CLUB</footer><div id="toast"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.75.0/dist/umd/supabase.min.js"></script>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e2b8"/><stop offset="1" stop-color="#b8935a"/></linearGradient></defs></svg>
+<div id="vp"><div id="w"></div></div>
+<div id="lite"></div>
+<div class="hud" id="br">RIMHABY CLUB</div><div class="hud" id="hint"></div><div class="hud" id="pg"><i></i></div>
+<button id="md" onclick="setLite(!document.body.classList.contains('lite'))">Mode simple</button>
+<div id="iris"><div></div></div>
 <script>
-const sb=supabase.createClient("https://jlnnlisowvbvwmndrvvl.supabase.co","sb_publishable_KovKKVNrr_SOfTZR2mhDCQ_OJ5Ya9g3");
-const $=s=>document.querySelector(s),esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const toast=m=>{const t=$("#toast");t.textContent=m;t.className="on";clearTimeout(toast.t);toast.t=setTimeout(()=>t.className="",3200)};
-const D=864e5;let S={u:null,p:null};
-window.addEventListener("error",e=>toast("Erreur : "+e.message));window.addEventListener("unhandledrejection",e=>toast("Erreur : "+((e.reason&&e.reason.message)||e.reason)));
-const isAct=c=>c.status==="active"&&new Date(c.ends_at)>new Date();
-const fd=d=>new Date(d).toLocaleDateString("fr-FR");
-const cdTxt=e=>{let d=new Date(e)-Date.now();if(d<=0)return"Terminé";let j=d/D|0,h=d%D/36e5|0,m=d%36e5/6e4|0,s=d%6e4/1e3|0;return`${j}j ${h}h ${m}m ${s}s`};
-setInterval(()=>document.querySelectorAll("[data-end]").forEach(x=>x.textContent=cdTxt(x.dataset.end)),1000);
-const stTag=s=>s=="valid"?'<span class="tag ok">Validé</span>':s=="refused"?'<span class="tag ko">Refusé</span>':'<span class="tag wa">En attente</span>';
-const card=c=>`<a class="card" href="#concours-${c.id}"><span class="em">🎁</span><h3>${esc(c.title)}</h3><p class="mut sm">${esc(c.prize)}</p>${isAct(c)?`<span class="tag wa">En cours</span><div class="cd" data-end="${c.ends_at}">${cdTxt(c.ends_at)}</div>`:'<span class="tag">Terminé</span>'}</a>`;
-const wcard=w=>`<div class="card"><span class="em">🏆</span><h3>${esc(w.winner_name)}</h3><p class="mut sm">${esc(w.contest_title)} · ${fd(w.drawn_at)}</p></div>`;
-async function loadP(){S.p=null;if(S.u){const{data}=await sb.from("profiles").select("*").eq("id",S.u.id).maybeSingle();S.p=data}}
-sb.auth.onAuthStateChange((ev,s)=>{if(ev=="PASSWORD_RECOVERY")S.rec=true;setTimeout(async()=>{S.u=s?s.user:null;await loadP();go()},0)});
-window.addEventListener("hashchange",go);
-function nav(h){const l=[["accueil","Accueil"],["concours","Concours"],["gagnants","Gagnants"],["contact","Contact"]];
-if(S.u){l.push(["profil","Mon profil"]);if(S.p&&S.p.is_admin)l.push(["admin","Admin"]);l.push(["out","Déconnexion"])}else l.push(["connexion","Connexion"]);
-$("#nav").innerHTML=l.map(([k,t])=>`<a href="#${k}" class="${h.startsWith(k)?"on":""}" onclick="$('#nav').classList.remove('open')">${t}</a>`).join("")}
-async function go(){const h=location.hash.slice(1)||"accueil";if(h=="out"){await sb.auth.signOut();location.hash="accueil";return toast("Déconnectée")}
-nav(h);let v;try{
-if(S.rec)v=pNew();else if(h=="accueil")v=await pAcc();else if(h=="concours"||h=="concours-ended")v=await pList(h=="concours"?1:0);else if(h.startsWith("concours-"))v=await pDet(h.split("-")[1]);
-else if(h=="connexion"||h=="inscription")v=pAuth();else if(h=="profil")v=await pProf();else if(h=="gagnants")v=await pWin();else if(h=="contact")v=pCon();else if(h=="apropos")v=pApro();else if(h.startsWith("admin"))v=await pAdm(h);else v=await pAcc()
-}catch(e){v=`<div class="card">Erreur : ${esc(e.message||e)}</div>`}
-$("#app").innerHTML=v;window.scrollTo(0,0);if(h=="inscription"&&$("#t2"))tab(2)}
-async function pAcc(){const[{data:c},{data:w}]=await Promise.all([sb.from("contests").select("*").order("ends_at"),sb.rpc("public_winners")]);
-return`<section class="hero"><p class="tag wa">✦ Concours officiels ✦</p><h1>Gagnez avec <span>Rimhaby</span></h1><p>Bienvenue au club de la communauté de Rimhaby : concours élégants, lots d’exception et tirages au sort transparents.</p><a class="btn" href="#concours">Voir les concours</a></section><h2>Concours vedettes</h2><div class="grid">${(c||[]).filter(isAct).slice(0,3).map(card).join("")||'<p class="mut">Aucun concours en cours.</p>'}</div><h2>Derniers gagnants</h2><div class="grid">${(w||[]).slice(0,3).map(wcard).join("")||'<p class="mut">Pas encore de gagnante.</p>'}</div>`}
-async function pList(a){const{data:c}=await sb.from("contests").select("*").order("ends_at",{ascending:!a});
-return`<h2>Concours</h2><div class="tabs"><button class="${a?"on":""}" onclick="location.hash='concours'">Actifs</button><button class="${a?"":"on"}" onclick="location.hash='concours-ended'">Terminés</button></div><div class="grid">${(c||[]).filter(x=>isAct(x)==!!a).map(card).join("")||'<p class="mut">Aucun concours.</p>'}</div>`}
-async function pDet(id){const{data:c}=await sb.from("contests").select("*").eq("id",id).maybeSingle();if(!c)return"<p>Concours introuvable.</p>";
-let mine=null;if(S.u){const r=await sb.from("entries").select("*").eq("contest_id",id).eq("user_id",S.u.id).maybeSingle();mine=r.data}
-const act=isAct(c),rules=(c.rules||[]).map(r=>`<li>${esc(r)}</li>`).join("");
-return`<a class="mut sm" href="#concours">← Retour</a><div class="card" style="margin-top:12px"><span class="em">🎁</span><h1 style="font-size:30px">${esc(c.title)}</h1><p style="color:var(--gold)">🎁 ${esc(c.prize)}</p>${c.description?`<p>${esc(c.description)}</p>`:""}${act?`<div class="cd" data-end="${c.ends_at}">${cdTxt(c.ends_at)}</div>`:'<span class="tag">Terminé</span>'}</div>
-${rules?`<h2>Règles et conditions</h2><div class="card"><ol>${rules}</ol><p class="sm mut">Une participation par personne. Dossier vérifié par l’équipe avant le tirage.</p></div>`:""}
-${act?`<h2>Participer</h2><div class="card">${!S.u?'<p>Connecte-toi pour participer.</p><a class="btn" href="#connexion">Se connecter</a>':mine?`<p>Participation envoyée : ${stTag(mine.status)}</p>${mine.reject_reason?`<p class="sm" style="color:var(--ko)">Motif : ${esc(mine.reject_reason)}</p>`:""}`:`<label>Capture d’écran (JPG, PNG ou WebP, 5 Mo max)</label><input type="file" id="pf" accept="image/jpeg,image/png,image/webp" onchange="pfc(this)"><label><input type="checkbox" id="pc" style="width:auto;margin-right:8px">J’accepte le règlement et le traitement de mes données.</label><br><button class="btn" id="pb" onclick="envoyer(${c.id})">Envoyer ma participation</button><p class="sm" id="pmsg" style="color:var(--gold);margin-top:10px"></p>`}</div>`:""}`}
-const say=m=>{const e=$("#pmsg");if(e)e.textContent=m;toast(m)};
-function pfc(i){const f=i.files[0],e=$("#pmsg");if(e)e.textContent=f?"Fichier choisi : "+f.name+" ("+Math.round(f.size/1024)+" Ko)":""}
-async function envoyer(cid){try{
-const f=$("#pf").files[0];if(!f)return say("Ajoute d’abord une capture d’écran");if(!$("#pc").checked)return say("Coche la case pour accepter le règlement");
-const m={"image/jpeg":"jpg","image/png":"png","image/webp":"webp"},ct2={jpg:"image/jpeg",png:"image/png",webp:"image/webp"};
-let ext=m[f.type];if(!ext){let n=(f.name.split(".").pop()||"").toLowerCase();if(n=="jpeg")n="jpg";if(ct2[n])ext=n}
-if(!ext)return say("Format non accepté ("+(f.type||"inconnu")+") : utilise une capture PNG ou JPG");
-if(f.size>5242880)return say("Fichier trop lourd (5 Mo max)");
-if(S.p&&!S.p.is_active)return say("Ton compte est suspendu : tu ne peux pas participer");
-$("#pb").disabled=true;say("Envoi en cours…");
-const path=S.u.id+"/"+cid+"-"+Date.now()+"."+ext;
-const up=await sb.storage.from("proofs").upload(path,f,{contentType:ct2[ext]});if(up.error){$("#pb").disabled=false;return say("Téléversement refusé : "+up.error.message)}
-const r=await sb.from("entries").insert({contest_id:cid,user_id:S.u.id,proof_path:path});
-if(r.error){$("#pb").disabled=false;return say(r.error.code=="23505"?"Tu participes déjà à ce concours":"Enregistrement refusé : "+r.error.message)}
-toast("Participation envoyée ✓");go()
-}catch(e){const b=$("#pb");if(b)b.disabled=false;say("Erreur : "+(e.message||e))}}
-async function forgot(){const e=$("#ae").value.trim();if(!e)return toast("Saisis d’abord ton e-mail");const r=await sb.auth.resetPasswordForEmail(e,{redirectTo:location.origin+location.pathname});if(r.error)return toast(r.error.message);toast("Si ce compte existe, un e-mail vient d’être envoyé")}
-function pNew(){return'<div class="box card"><h2 style="margin-top:0">Nouveau mot de passe</h2><label>Nouveau mot de passe (8 caractères min.)</label><input id="np" type="password" autocomplete="new-password"><button class="btn" style="width:100%" id="nb" onclick="setNew()">Enregistrer</button></div>'}
-async function setNew(){const p=$("#np").value;if(p.length<8)return toast("8 caractères minimum");$("#nb").disabled=true;const r=await sb.auth.updateUser({password:p});if(r.error){$("#nb").disabled=false;return toast(r.error.message)}S.rec=false;toast("Mot de passe modifié ✓");location.hash="profil";go()}
-function pAuth(){if(S.u)return'<div class="box card"><p>Tu es connectée.</p><a class="btn" href="#profil">Mon profil</a></div>';
-return`<div class="box card"><h2 style="margin-top:0">Connexion</h2><div class="tabs"><button class="on" id="t1" onclick="tab(1)">Connexion</button><button id="t2" onclick="tab(2)">Inscription</button></div><div id="nm" style="display:none"><label>Nom complet</label><input id="an" autocomplete="name"></div><label>E-mail</label><input id="ae" type="email" autocomplete="email"><label>Mot de passe (8 caractères min.)</label><input id="ap" type="password" autocomplete="current-password"><button class="btn" style="width:100%" id="ab" onclick="auth()">Continuer</button><p class="sm"><a href="#" onclick="event.preventDefault();forgot()" style="color:var(--rose)">Mot de passe oublié ?</a></p><p class="sm mut">Tes données sont utilisées uniquement pour gérer les concours.</p></div>`}
-let mode=1;function tab(n){mode=n;$("#t1").className=n==1?"on":"";$("#t2").className=n==2?"on":"";$("#nm").style.display=n==2?"block":"none"}
-async function auth(){const e=$("#ae").value.trim(),p=$("#ap").value;if(!e||p.length<8)return toast("E-mail et mot de passe (8 car. min.) requis");$("#ab").disabled=true;let r;
-if(mode==2){const n=$("#an").value.trim();if(!n){$("#ab").disabled=false;return toast("Indique ton nom")}r=await sb.auth.signUp({email:e,password:p,options:{data:{full_name:n},emailRedirectTo:location.origin+location.pathname}});
-if(!r.error){$("#ab").disabled=false;return toast("Compte créé : vérifie ta boîte mail pour confirmer")}}
-else{r=await sb.auth.signInWithPassword({email:e,password:p});if(!r.error){location.hash="profil"}}
-if(r.error){$("#ab").disabled=false;toast(r.error.message)}}
-async function pProf(){if(!S.u)return pAuth();const{data:l}=await sb.from("entries").select("*,contests(title)").eq("user_id",S.u.id).order("created_at",{ascending:false});
-return`<h2>Bonjour ${esc(S.p?S.p.full_name:"")}</h2>${S.p&&!S.p.is_active?'<p class="tag ko">Compte suspendu</p>':""}<h3>Mes participations</h3><div class="grid">${(l||[]).map(p=>`<div class="card"><b>${esc(p.contests?p.contests.title:"")}</b><p class="sm mut">Envoyée le ${fd(p.created_at)}</p>${stTag(p.status)}${p.reject_reason?`<p class="sm" style="color:var(--ko)">Motif : ${esc(p.reject_reason)}</p>`:""}</div>`).join("")||'<p class="mut">Aucune participation pour l’instant.</p>'}</div><p class="sm mut" style="margin-top:20px">Le statut de tes dossiers se met à jour ici dès que l’équipe les traite.</p>`}
-async function pWin(){const{data:w}=await sb.rpc("public_winners");return`<h2>Gagnants</h2><div class="card tw"><table><tr><th>Date</th><th>Concours</th><th>Gagnante</th></tr>${(w||[]).map(x=>`<tr><td>${fd(x.drawn_at)}</td><td>${esc(x.contest_title)}</td><td>🏆 ${esc(x.winner_name)}</td></tr>`).join("")}</table></div><p class="sm mut">Chaque tirage est effectué parmi les participations validées et enregistré dans l’historique.</p>`}
-function pApro(){return`<h2>À propos</h2><div class="card"><h3>RIMHABY CLUB</h3><p>Le club de la communauté de Rimhaby : des concours élégants, des lots d’exception et des tirages au sort transparents, enregistrés et consultables par tous.</p></div>`}
-function pCon(){return`<h2>Contact</h2><div class="card"><h3>Réseaux</h3><p>Ajoute ici les liens officiels de Rimhaby (Instagram, TikTok, Snapchat).</p></div>`}
-const AT=[["admin","Tableau de bord"],["admin-concours","Concours"],["admin-participants","Participants"],["admin-tirage","Tirage"],["admin-users","Utilisateurs"]];
-async function pAdm(k){if(!S.p||!S.p.is_admin)return'<div class="box card"><h3>🔒 Accès réservé</h3><p class="mut">Cet espace est réservé aux administratrices.</p></div>';
-const sub=`<div class="sub">${AT.map(([a,t])=>`<a href="#${a}" class="${a==k?"on":""}">${t}</a>`).join("")}</div>`;let b="";
-const cnt=async(t,f)=>{let q=sb.from(t).select("*",{count:"exact",head:true});if(f)q=f(q);return(await q).count||0};
-if(k=="admin"){const[a,e,pe,u]=await Promise.all([cnt("contests",q=>q.eq("status","active")),cnt("entries"),cnt("entries",q=>q.eq("status","pending")),cnt("profiles")]);
-const{data:d}=await sb.from("draws").select("*,contests(title)").order("drawn_at",{ascending:false});
-b=`<div class="grid">${[["Concours actifs",a],["Participations",e],["À valider",pe],["Utilisateurs",u]].map(([t,v])=>`<div class="card"><div class="stat">${v}</div><span class="mut sm">${t}</span></div>`).join("")}</div><h2>Journal des tirages</h2><div class="card sm">${(d||[]).map(x=>`${new Date(x.drawn_at).toLocaleString("fr-FR")} · ${esc(x.contests?x.contests.title:"")} · ${x.eligible_count} éligibles`).join("<br>")||'<span class="mut">Aucun tirage.</span>'}</div>`}
-if(k=="admin-concours"){const{data:c}=await sb.from("contests").select("*").order("created_at",{ascending:false});
-b=`<button class="btn s" onclick="addC()">+ Nouveau concours</button><div class="card tw" style="margin-top:12px"><table><tr><th>Titre</th><th>Fin</th><th>Statut</th><th></th></tr>${(c||[]).map(x=>`<tr><td>${esc(x.title)}</td><td>${fd(x.ends_at)}</td><td>${x.status=="active"?"Actif":"Terminé"}</td><td><button class="btn s o" onclick="editC(${x.id})">Modifier</button> <button class="btn s r" onclick="delC(${x.id})">Suppr.</button></td></tr>`).join("")}</table></div>`}
-if(k=="admin-participants"){const{data:p}=await sb.from("entries").select("*,contests(title),profiles(full_name,email)").order("created_at",{ascending:false});
-b=`<div class="card tw"><table><tr><th>Participante</th><th>Concours</th><th>Justificatif</th><th>Statut</th><th></th></tr>${(p||[]).map(x=>`<tr><td>${esc(x.profiles?x.profiles.full_name:"")}<br><span class="mut sm">${esc(x.profiles?x.profiles.email:"")}</span></td><td>${esc(x.contests?x.contests.title:"")}</td><td><button class="btn s o" onclick="proof(this.dataset.p)" data-p="${esc(x.proof_path)}">Voir</button></td><td>${stTag(x.status)}${x.reject_reason?`<br><span class="sm mut">${esc(x.reject_reason)}</span>`:""}</td><td><button class="btn s g" onclick="setP(${x.id},'valid')">✓</button> <button class="btn s r" onclick="setP(${x.id},'refused')">✕</button></td></tr>`).join("")}</table></div>`}
-if(k=="admin-tirage"){const{data:c}=await sb.from("contests").select("*").eq("status","active").order("ends_at");
-b=`<div class="card"><label>Concours</label><select id="dc" onchange="dEl()">${(c||[]).map(x=>`<option value="${x.id}">${esc(x.title)}</option>`).join("")}</select><p class="sm" id="el"></p><div class="draw" id="ds">—</div><button class="btn" onclick="draw()">🎲 Lancer le tirage</button><p class="sm mut">Seules les participations validées sont éligibles. Le tirage est effectué et enregistré par le serveur, et ne peut avoir lieu qu’une fois par concours.</p></div>`;setTimeout(dEl,0)}
-if(k=="admin-users"){const{data:u}=await sb.from("profiles").select("*").order("created_at",{ascending:false});
-b=`<div class="card tw"><table><tr><th>Nom</th><th>E-mail</th><th>État</th><th></th></tr>${(u||[]).map(x=>`<tr><td>${esc(x.full_name)}${x.is_admin?" ⭐":""}</td><td>${esc(x.email)}</td><td>${x.is_active?"Actif":"Suspendu"}</td><td>${x.is_admin?"":`<button class="btn s o" onclick="setU('${x.id}',${!x.is_active})">${x.is_active?"Suspendre":"Réactiver"}</button>`}</td></tr>`).join("")}</table></div>`}
-return`<h2 style="margin-top:0">Espace administrateur</h2>${sub}${b}`}
-async function proof(p){const w=window.open("","_blank");const{data,error}=await sb.storage.from("proofs").createSignedUrl(p,120);if(error){if(w)w.close();return toast(error.message)}if(w)w.location=data.signedUrl;else location.href=data.signedUrl}
-function modal(h){return new Promise(res=>{const d=document.createElement("div");d.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px";d.innerHTML='<div class="card" style="width:100%;max-width:420px;max-height:90vh;overflow:auto">'+h+'<div style="display:flex;gap:10px;margin-top:8px"><button class="btn" id="mok">OK</button><button class="btn o" id="mno">Annuler</button></div></div>';document.body.appendChild(d);const done=v=>{d.remove();res(v)};d.querySelector("#mno").onclick=()=>done(null);d.querySelector("#mok").onclick=()=>done([...d.querySelectorAll("input")].map(i=>i.value))})}
-const ask=(t,f)=>modal('<h3 style="margin-bottom:10px">'+t+'</h3>'+f.map(([l,v,ty])=>'<label>'+l+'</label><input type="'+(ty||"text")+'" value="'+esc(v||"")+'">').join(""));
-const yes=async m=>(await modal("<p>"+m+"</p>"))!==null;
-async function setP(id,s){let m=null;if(s=="refused"){const v=await ask("Refuser la participation",[["Motif du refus"]]);if(!v||!v[0].trim())return;m=v[0].trim()}const r=await sb.from("entries").update({status:s,reject_reason:m}).eq("id",id);if(r.error)return toast(r.error.message);toast("Statut mis à jour");go()}
-async function addC(){const v=await ask("Nouveau concours",[["Titre"],["Lot"],["Durée en jours","7","number"],["Règles (séparées par ;)","Suivre @rimhaby;Envoyer une capture d’écran"]]);if(!v||!v[0].trim())return;const e=await sb.from("contests").insert({title:v[0].trim(),prize:v[1].trim(),rules:v[3].split(";").map(x=>x.trim()).filter(Boolean),ends_at:new Date(Date.now()+(parseInt(v[2])||7)*D).toISOString()});if(e.error)return toast(e.error.message);toast("Concours créé ✓");go()}
-async function editC(id){const{data:c,error}=await sb.from("contests").select("*").eq("id",id).single();if(error)return toast(error.message);
-const v=await ask("Modifier le concours",[["Titre",c.title],["Lot",c.prize],["Description",c.description||""],["Date de fin",new Date(c.ends_at).toISOString().slice(0,10),"date"],["Règles (séparées par ;)",(c.rules||[]).join(";")]]);
-if(!v||!v[0].trim())return;if(!v[3])return toast("Indique une date de fin");
-const r=await sb.from("contests").update({title:v[0].trim(),prize:v[1].trim(),description:v[2].trim()||null,ends_at:new Date(v[3]+"T23:59:00").toISOString(),rules:v[4].split(";").map(x=>x.trim()).filter(Boolean)}).eq("id",id);if(r.error)return toast(r.error.message);toast("Concours modifié ✓");go()}
-async function delC(id){if(!(await yes("Supprimer ce concours et ses participations ?")))return;const r=await sb.from("contests").delete().eq("id",id);if(r.error)return toast(r.error.message);go()}
-async function dEl(){const s=$("#dc");if(!s)return;const{data}=await sb.from("entries").select("profiles(full_name)").eq("contest_id",s.value).eq("status","valid");$("#el").innerHTML=`<b>${(data||[]).length} participation(s) validée(s) éligible(s) :</b> ${(data||[]).map(x=>esc(x.profiles?x.profiles.full_name:"")).join(", ")||"aucune"}`;$("#ds").textContent="—"}
-async function draw(){const id=$("#dc").value;if(!id||!(await yes("Lancer le tirage ? Il est définitif.")))return;const{data,error}=await sb.rpc("run_draw",{p_contest_id:Number(id)});if(error)return toast(error.message);const r=Array.isArray(data)?data[0]:data;$("#ds").textContent="🏆 "+r.winner_name;toast("Tirage enregistré ✓")}
-async function setU(id,a){const r=await sb.rpc("set_user_active",{p_user:id,p_active:a});if(r.error)return toast(r.error.message);go()}
+if(/access_token|type=recovery|error_code/.test(location.hash+location.search))location.replace("app.html"+location.search+location.hash);
+const $=s=>document.querySelector(s),vp=$("#vp"),W=$("#w");
+["gesturestart","gesturechange","gestureend"].forEach(t=>document.addEventListener(t,e=>e.preventDefault()));document.addEventListener("touchmove",e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
+const S={crown:'<path d="M20 80l8-30 14 18 8-26 8 26 14-18 8 30z" fill="url(#gg)"/><rect x="20" y="84" width="60" height="8" fill="url(#gg)"/>',
+gift:'<rect x="25" y="60" width="50" height="40" fill="url(#gg)"/><rect x="45" y="60" width="10" height="40" fill="#e8b9c4"/><path d="M50 60c-14-22-26-6-14 0zM50 60c14-22 26-6 14 0z" fill="none" stroke="url(#gg)" stroke-width="4"/>',
+cup:'<path d="M32 40h36v18a18 18 0 0 1-36 0z" fill="url(#gg)"/><rect x="46" y="74" width="8" height="14" fill="url(#gg)"/><rect x="34" y="88" width="32" height="8" rx="2" fill="url(#gg)"/>',
+star:'<path d="M50 30l6 24 24 6-24 6-6 24-6-24-24-6 24-6z" fill="url(#gg)"/>',
+key:'<circle cx="38" cy="60" r="14" fill="none" stroke="url(#gg)" stroke-width="7"/><path d="M52 60h34M76 60v12M66 60v9" stroke="url(#gg)" stroke-width="7" fill="none"/>',
+lotus:'<circle cx="50" cy="62" r="26" fill="none" stroke="url(#gg)" stroke-width="3"/><circle cx="50" cy="62" r="14" fill="url(#gg)"/>',
+mail:'<rect x="22" y="48" width="56" height="38" rx="3" fill="none" stroke="url(#gg)" stroke-width="5"/><path d="M22 52l28 22 28-22" fill="none" stroke="url(#gg)" stroke-width="5"/>'};
+const F=[
+{t:"Accueil",h:"#accueil",s:-1,z:620,m:"crown",bg:"radial-gradient(circle at 50% 35%,#5a2c3c,#140d11 75%)"},
+{t:"Concours",h:"#concours",s:1,z:620,m:"gift",bg:"linear-gradient(160deg,#e8b9c4,#9a5a6e 60%,#2a1620)"},
+{t:"Gagnants",h:"#gagnants",s:-1,z:1520,m:"cup",bg:"linear-gradient(160deg,#1a1417,#3b2a22 60%,#d9bf8c)"},
+{t:"Inscription",h:"#inscription",s:1,z:1520,m:"star",bg:"radial-gradient(circle at 70% 30%,#f2cfd8,#c98f9f 45%,#201318)"},
+{t:"Connexion",h:"#connexion",s:-1,z:2420,m:"key",bg:"linear-gradient(200deg,#0d0b0c,#2e1d25 60%,#8a6a45)"},
+{t:"À propos",h:"#apropos",s:1,z:2420,m:"lotus",bg:"radial-gradient(circle at 50% 60%,#f6e7cf,#d9a1b0 55%,#4a2a35)"},
+{t:"Contact",h:"#contact",s:0,z:3640,m:"mail",bg:"linear-gradient(135deg,#d9bf8c,#6d4c52 55%,#0d0b0c)"}];
+const Z=[620,1520,2420,3640],STOPS=[60,960,1860,2920],MAX=3300;
+const pools=Z.map(z=>"radial-gradient(ellipse 330px 160px at 50% "+(1200+z)+"px,#ffe2b455,transparent 70%)").join(",");
+const strips=Z.map(z=>"linear-gradient(180deg,transparent "+(1196+z)+"px,#fff6e0 "+(1196+z)+"px "+(1204+z)+"px,transparent "+(1204+z)+"px),linear-gradient(180deg,transparent "+(1140+z)+"px,#ffe9c04d "+(1200+z)+"px,transparent "+(1260+z)+"px)").join(",");
+W.innerHTML='<div class="p wl"></div><div class="p wr"></div><div class="p fl" style="background:'+pools+',repeating-linear-gradient(90deg,transparent 0 149px,#ffffff12 149px 150px),linear-gradient(180deg,#120d0f,#2a1d22 35%,#130e10)"></div><div class="p ce" style="background:'+strips+',linear-gradient(180deg,#0e0b0c,#1d1518)"></div><div class="p ew"></div>';
+F.forEach((f,i)=>{const e=document.createElement("div");e.className="fr p";e.dataset.i=i;
+e.style.cssText="--bg:"+f.bg+";transform:"+(f.s?"translate3d("+f.s*446+"px,0,"+-f.z+"px) rotateY("+-f.s*90+"deg)":"translate3d(0,0,-3690px)");
+e.innerHTML='<div class="gl"></div><div class="lp"></div><div class="pt"><svg viewBox="0 0 100 130">'+S[f.m]+'</svg></div><div class="cap"><small>0'+(i+1)+'</small><b>'+f.t+'</b><i>Explorer →</i></div>';
+W.appendChild(e);f.e=e});
+$("#lite").innerHTML=F.map(f=>'<a href="app.html'+f.h+'" style="--bg:'+f.bg+'">'+f.t+'</a>').join("");
+const stopFor=i=>F[i].s?F[i].z-560:F[i].z-720;
+let an=null,pend=null,yaw=0,cam=0,vel=0,drag=0,py=0,pt=0,mv=0,li=0,gl=null,last=performance.now(),raf=0;
+$("#hint").textContent=matchMedia("(pointer:coarse)").matches?"Glisse vers le haut pour avancer":"Molette pour avancer";
+const hideHint=()=>$("#hint").style.opacity=0;
+vp.addEventListener("pointerdown",e=>{if(an||!e.isPrimary){drag=0;return}drag=1;pend=null;py=e.clientY;pt=li=performance.now();mv=0;vel=0;gl=null;vp.setPointerCapture(e.pointerId)});
+vp.addEventListener("pointermove",e=>{if(!drag||!e.isPrimary)return;const n=performance.now(),dy=(py-e.clientY)*1.7,dt=Math.max(8,n-pt);cam+=dy;mv+=Math.abs(dy);vel=Math.max(-70,Math.min(70,vel*.6+dy/dt*16.67*.4));py=e.clientY;pt=li=n;hideHint()});
+vp.addEventListener("pointerup",e=>{drag=0;if(mv<14&&!an){const i=hit(e.clientX,e.clientY);if(i>=0)tap(i)}if(performance.now()-pt>90||Math.abs(vel)<3)vel=0});
+vp.addEventListener("pointercancel",()=>drag=0);
+vp.addEventListener("wheel",e=>{e.preventDefault();if(an)return;pend=null;vel=Math.max(-70,Math.min(70,vel+e.deltaY*.05));li=performance.now();gl=null;hideHint()},{passive:false});
+addEventListener("keydown",e=>{if(e.key=="ArrowUp"||e.key=="ArrowDown"){vel+=e.key=="ArrowUp"?14:-14;li=performance.now();gl=null;hideHint()}});
+const PD=720;
+function hit(px,py){const cx=innerWidth/2,cy=innerHeight/2;let b=-1,bs=0;
+F.forEach((f,i)=>{let ok=0,sc=0;
+if(!f.s){sc=PD/(PD+3690-cam);ok=Math.abs(px-cx)<170*sc&&Math.abs(py-cy)<225*sc}
+else{const zn=f.z-cam-170,zf=f.z-cam+170;if(PD+zn<=20)return;const sn=PD/(PD+zn),sf=PD/(PD+zf),xa=cx+f.s*446*sn,xb=cx+f.s*446*sf;if(px<Math.min(xa,xb)||px>Math.max(xa,xb))return;sc=sn+(sf-sn)*(px-xa)/(xb-xa);ok=Math.abs(py-cy)<225*sc}
+if(ok&&sc>bs){bs=sc;b=i}});return b}
+function tap(i){const f=F[i];if(f.z-cam>1300){gl=stopFor(i);pend=i}else startAnim(i)}
+function startAnim(i){const f=F[i];an={i,t0:performance.now(),dur:1100,c0:cam,c1:f.s?f.z-145:f.z-430,y1:f.s*72};gl=null;vel=0;hideHint()}
+function openF(i){const f=F[i],r=f.e.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,ir=$("#iris");ir.style.background=f.bg;ir.firstChild.textContent=f.t;ir.style.clipPath="circle(0 at "+x+"px "+y+"px)";ir.classList.add("on");
+requestAnimationFrame(()=>requestAnimationFrame(()=>ir.style.clipPath="circle(150% at "+x+"px "+y+"px)"));setTimeout(()=>{location.href="app.html"+f.h},1000)}
+addEventListener("pageshow",()=>{an=null;yaw=0;pend=null;const ir=$("#iris");ir.classList.remove("on");ir.style.clipPath=""});
+function loop(n){const k=Math.min(3,(n-last)/16.67||1);last=n;
+if(an){const p=Math.min(1,(n-an.t0)/an.dur),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;cam=an.c0+(an.c1-an.c0)*e;yaw=an.y1*e;if(p>=1&&!an.done){an.done=1;openF(an.i)}}
+else if(!drag){if(gl!=null){vel=(gl-cam)*.07;if(Math.abs(gl-cam)<1.5){gl=null;if(pend!=null){const q=pend;pend=null;startAnim(q)}}}
+else{vel*=Math.pow(.93,k);if(Math.abs(vel)<.05)vel=0}
+cam+=vel*k}
+if(cam<0){cam=0;vel=0}if(cam>MAX){cam=MAX;vel=0}
+W.style.transform="rotateY("+yaw+"deg) translate3d(0,"+Math.sin(cam/70)*2.5+"px,"+cam+"px)";
+F.forEach(f=>{const d=f.z-cam;f.e.style.setProperty("--l",(an&&F[an.i]===f?1:Math.max(.08,1-Math.abs(d-560)/1100)).toFixed(2));f.e.style.setProperty("--t",Math.max(0,Math.min(1,(1250-d)/650)).toFixed(2));f.e.classList.toggle("near",d<950&&d>-100)});
+$("#pg i").style.height=cam/MAX*100+"%";raf=requestAnimationFrame(loop)}
+function setLite(b){document.body.classList.toggle("lite",b);$("#md").textContent=b?"Mode galerie":"Mode simple";try{localStorage.setItem("lite",b?"1":"0")}catch(e){}cancelAnimationFrame(raf);if(!b){last=performance.now();raf=requestAnimationFrame(loop)}}
+let sv=null;try{sv=localStorage.getItem("lite")}catch(e){}
+setLite(sv=="1"||(sv===null&&(matchMedia("(prefers-reduced-motion:reduce)").matches||(navigator.hardwareConcurrency||4)<=2)));
 </script></body></html>
