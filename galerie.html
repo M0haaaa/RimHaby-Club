@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>RIMHABY CLUB · Galerie</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#d9bf8c;--rose:#e8b9c4;--ink:#1a1416;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden;background:#070607;font:14px Inter,system-ui,sans-serif;color:#f4ede4;overscroll-behavior:none}
+#vp{position:fixed;inset:0;perspective:720px;touch-action:none;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#2b2024,#050405 75%)}
+#vp:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 35%,#000b 100%)}
+#w{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.p{position:absolute}
+.wl,.wr{top:50%;width:4900px;height:560px;margin-top:-280px;background:linear-gradient(0deg,#1c1618 0 16px,#cdbfa8 16px 19px,transparent 19px),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .45 0 0 0 0 .4 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(var(--a),#ece5db 0,#ece5db 30%,#b9b0a5 70%,#3a3236 100%)}
+.wl{--a:90deg;left:50%;transform-origin:0 50%;transform:translateX(-450px) rotateY(90deg) translateX(-1200px)}
+.wr{--a:270deg;right:50%;transform-origin:100% 50%;transform:translateX(450px) rotateY(-90deg) translateX(1200px)}
+.fl,.ce{left:50%;top:50%;width:900px;height:4900px;margin-left:-450px;transform-origin:50% 0}
+.fl{transform:translateY(280px) rotateX(-90deg) translateY(-1200px)}
+.ce{transform:translateY(-280px) rotateX(-90deg) translateY(-1200px)}
+.ew{left:50%;top:50%;width:900px;height:560px;margin:-280px 0 0 -450px;transform:translateZ(-3700px);background:linear-gradient(#2a2226,#141012)}
+.fr{left:50%;top:50%;width:340px;height:450px;margin:-225px 0 0 -170px;padding:14px;background:linear-gradient(135deg,#f6e2b8,#a8814a 50%,#e8c98a);box-shadow:0 30px 60px #0009;border-radius:3px}
+.pt{position:relative;width:100%;height:100%;background:var(--bg);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:inset 0 0 40px #000a}
+.pt svg{width:58%}.pt:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,#ffffff22 50%,transparent 60%)}
+.gl{position:absolute;left:-90px;right:-90px;top:-150px;bottom:-70px;background:radial-gradient(ellipse at 50% 0,#ffecc8bb,transparent 62%);opacity:var(--l,.1);pointer-events:none;z-index:-1}
+.lp{position:absolute;left:25%;right:25%;top:-22px;height:7px;border-radius:4px;background:linear-gradient(#f6e2b8,#8a6a45);box-shadow:0 0 14px #ffe3a8}
+.cap{position:absolute;left:-20px;right:-20px;top:100%;margin-top:28px;text-align:center;color:var(--ink);opacity:var(--t,0);transform:translateY(calc((1 - var(--t,0))*14px))}
+.cap small{display:block;color:#8a6a45;letter-spacing:.3em;font-size:11px}
+.cap b{display:block;font:600 24px 'Playfair Display',Georgia,serif;letter-spacing:.08em;text-transform:uppercase}
+.cap i{display:block;font-style:normal;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#a86a7e;opacity:0;transition:opacity .5s}.near .cap i{opacity:1}
+.hud{position:fixed;z-index:20;pointer-events:none}
+#br{top:calc(14px + env(safe-area-inset-top,0px));left:18px;letter-spacing:.22em;color:var(--gold);font:500 14px 'Playfair Display',serif}
+#hint{bottom:calc(92px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#f4ede4cc;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:opacity .8s}
+#pg{right:12px;top:50%;height:120px;width:2px;margin-top:-60px;background:#ffffff33}#pg i{display:block;width:100%;background:var(--gold);height:0}
+#md{position:fixed;left:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;border:1px solid #d9bf8c66;background:#000a;color:var(--gold);border-radius:99px;padding:8px 14px;font:12px Inter,sans-serif;cursor:pointer}
+#lite{display:none;position:fixed;inset:0;overflow:auto;padding:70px 20px 90px;background:#0a0809}
+#lite a{display:block;margin-bottom:14px;padding:22px;border-radius:18px;border:1px solid #d9bf8c55;background:var(--bg);color:#fff;text-decoration:none;font:500 24px 'Playfair Display',serif}
+body.lite #lite{display:block}body.lite #vp,body.lite #pg,body.lite #hint{display:none}
+#iris{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;clip-path:circle(0 at 50% 50%);visibility:hidden;transition:clip-path .9s cubic-bezier(.7,0,.2,1)}
+#iris.on{visibility:visible}#iris div{font:500 44px 'Playfair Display',serif;color:#fff;text-shadow:0 4px 30px #000;opacity:0;transition:opacity .5s .4s}#iris.on div{opacity:1}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e2b8"/><stop offset="1" stop-color="#b8935a"/></linearGradient></defs></svg>
+<div id="vp"><div id="w"></div></div>
+<div id="lite"></div>
+<div class="hud" id="br">RIMHABY CLUB</div><div class="hud" id="hint"></div><div class="hud" id="pg"><i></i></div>
+<button id="md" onclick="setLite(!document.body.classList.contains('lite'))">Mode simple</button>
+<div id="iris"><div></div></div>
+<script>
+const $=s=>document.querySelector(s),vp=$("#vp"),W=$("#w");
+const S={crown:'<path d="M20 80l8-30 14 18 8-26 8 26 14-18 8 30z" fill="url(#gg)"/><rect x="20" y="84" width="60" height="8" fill="url(#gg)"/>',
+gift:'<rect x="25" y="60" width="50" height="40" fill="url(#gg)"/><rect x="45" y="60" width="10" height="40" fill="#e8b9c4"/><path d="M50 60c-14-22-26-6-14 0zM50 60c14-22 26-6 14 0z" fill="none" stroke="url(#gg)" stroke-width="4"/>',
+cup:'<path d="M32 40h36v18a18 18 0 0 1-36 0z" fill="url(#gg)"/><rect x="46" y="74" width="8" height="14" fill="url(#gg)"/><rect x="34" y="88" width="32" height="8" rx="2" fill="url(#gg)"/>',
+star:'<path d="M50 30l6 24 24 6-24 6-6 24-6-24-24-6 24-6z" fill="url(#gg)"/>',
+key:'<circle cx="38" cy="60" r="14" fill="none" stroke="url(#gg)" stroke-width="7"/><path d="M52 60h34M76 60v12M66 60v9" stroke="url(#gg)" stroke-width="7" fill="none"/>',
+lotus:'<circle cx="50" cy="62" r="26" fill="none" stroke="url(#gg)" stroke-width="3"/><circle cx="50" cy="62" r="14" fill="url(#gg)"/>',
+mail:'<rect x="22" y="48" width="56" height="38" rx="3" fill="none" stroke="url(#gg)" stroke-width="5"/><path d="M22 52l28 22 28-22" fill="none" stroke="url(#gg)" stroke-width="5"/>'};
+const F=[
+{t:"Accueil",h:"#accueil",s:-1,z:620,m:"crown",bg:"radial-gradient(circle at 50% 35%,#5a2c3c,#140d11 75%)"},
+{t:"Concours",h:"#concours",s:1,z:620,m:"gift",bg:"linear-gradient(160deg,#e8b9c4,#9a5a6e 60%,#2a1620)"},
+{t:"Gagnants",h:"#gagnants",s:-1,z:1520,m:"cup",bg:"linear-gradient(160deg,#1a1417,#3b2a22 60%,#d9bf8c)"},
+{t:"Inscription",h:"#inscription",s:1,z:1520,m:"star",bg:"radial-gradient(circle at 70% 30%,#f2cfd8,#c98f9f 45%,#201318)"},
+{t:"Connexion",h:"#connexion",s:-1,z:2420,m:"key",bg:"linear-gradient(200deg,#0d0b0c,#2e1d25 60%,#8a6a45)"},
+{t:"À propos",h:"#apropos",s:1,z:2420,m:"lotus",bg:"radial-gradient(circle at 50% 60%,#f6e7cf,#d9a1b0 55%,#4a2a35)"},
+{t:"Contact",h:"#contact",s:0,z:3640,m:"mail",bg:"linear-gradient(135deg,#d9bf8c,#6d4c52 55%,#0d0b0c)"}];
+const Z=[620,1520,2420,3640],STOPS=[60,960,1860,2920],MAX=3000;
+const pools=Z.map(z=>"radial-gradient(ellipse 330px 160px at 50% "+(1200+z)+"px,#ffe2b455,transparent 70%)").join(",");
+const strips=Z.map(z=>"linear-gradient(180deg,transparent "+(1196+z)+"px,#fff6e0 "+(1196+z)+"px "+(1204+z)+"px,transparent "+(1204+z)+"px),linear-gradient(180deg,transparent "+(1140+z)+"px,#ffe9c04d "+(1200+z)+"px,transparent "+(1260+z)+"px)").join(",");
+W.innerHTML='<div class="p wl"></div><div class="p wr"></div><div class="p fl" style="background:'+pools+',repeating-linear-gradient(90deg,transparent 0 149px,#ffffff12 149px 150px),linear-gradient(180deg,#120d0f,#2a1d22 35%,#130e10)"></div><div class="p ce" style="background:'+strips+',linear-gradient(180deg,#0e0b0c,#1d1518)"></div><div class="p ew"></div>';
+F.forEach((f,i)=>{const e=document.createElement("div");e.className="fr p";e.dataset.i=i;
+e.style.cssText="--bg:"+f.bg+";transform:"+(f.s?"translate3d("+f.s*446+"px,0,"+-f.z+"px) rotateY("+-f.s*90+"deg)":"translate3d(0,0,-3690px)");
+e.innerHTML='<div class="gl"></div><div class="lp"></div><div class="pt"><svg viewBox="0 0 100 130">'+S[f.m]+'</svg></div><div class="cap"><small>0'+(i+1)+'</small><b>'+f.t+'</b><i>Explorer →</i></div>';
+W.appendChild(e);f.e=e});
+$("#lite").innerHTML=F.map(f=>'<a href="index.html'+f.h+'" style="--bg:'+f.bg+'">'+f.t+'</a>').join("");
+const stopFor=i=>F[i].s?F[i].z-560:F[i].z-720;
+let cam=0,vel=0,drag=0,py=0,pt=0,mv=0,li=0,gl=null,last=performance.now(),raf=0;
+$("#hint").textContent=matchMedia("(pointer:coarse)").matches?"Glisse vers le haut pour avancer":"Molette pour avancer";
+const hideHint=()=>$("#hint").style.opacity=0;
+vp.addEventListener("pointerdown",e=>{drag=1;py=e.clientY;pt=li=performance.now();mv=0;vel=0;gl=null;vp.setPointerCapture(e.pointerId)});
+vp.addEventListener("pointermove",e=>{if(!drag)return;const n=performance.now(),dy=(py-e.clientY)*1.7,dt=Math.max(8,n-pt);cam+=dy;mv+=Math.abs(dy);vel=Math.max(-70,Math.min(70,vel*.6+dy/dt*16.67*.4));py=e.clientY;pt=li=n;hideHint()});
+vp.addEventListener("pointerup",e=>{drag=0;if(mv<14){const x=document.elementFromPoint(e.clientX,e.clientY),el=x&&x.closest(".fr");if(el)tap(+el.dataset.i)}if(performance.now()-pt>90)vel=0});
+vp.addEventListener("pointercancel",()=>drag=0);
+vp.addEventListener("wheel",e=>{e.preventDefault();vel=Math.max(-70,Math.min(70,vel+e.deltaY*.05));li=performance.now();gl=null;hideHint()},{passive:false});
+addEventListener("keydown",e=>{if(e.key=="ArrowUp"||e.key=="ArrowDown"){vel+=e.key=="ArrowUp"?14:-14;li=performance.now();gl=null;hideHint()}});
+function tap(i){if(F[i].z-cam<1000)openF(i);else gl=stopFor(i)}
+function openF(i){const f=F[i],r=f.e.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,ir=$("#iris");ir.style.background=f.bg;ir.firstChild.textContent=f.t;ir.style.clipPath="circle(0 at "+x+"px "+y+"px)";ir.classList.add("on");
+requestAnimationFrame(()=>requestAnimationFrame(()=>ir.style.clipPath="circle(150% at "+x+"px "+y+"px)"));setTimeout(()=>{location.href="index.html"+f.h},1000)}
+addEventListener("pageshow",()=>{const ir=$("#iris");ir.classList.remove("on");ir.style.clipPath=""});
+function loop(n){const k=Math.min(3,(n-last)/16.67||1);last=n;
+if(!drag){if(gl!=null){vel=(gl-cam)*.07;if(Math.abs(gl-cam)<1.5)gl=null}
+else if(Math.abs(vel)<2&&n-li>700){let b=STOPS[0];STOPS.forEach(s=>{if(Math.abs(s-cam)<Math.abs(b-cam))b=s});if(Math.abs(b-cam)<300)vel=(b-cam)*.07;else vel*=Math.pow(.9,k)}
+else vel*=Math.pow(.95,k);cam+=vel*k}
+if(cam<0){cam=0;vel=0}if(cam>MAX){cam=MAX;vel=0}
+W.style.transform="translate3d(0,"+Math.sin(cam/70)*2.5+"px,"+cam+"px)";
+F.forEach(f=>{const d=f.z-cam;f.e.style.setProperty("--l",Math.max(.08,1-Math.abs(d-560)/1100).toFixed(2));f.e.style.setProperty("--t",Math.max(0,Math.min(1,(1250-d)/650)).toFixed(2));f.e.classList.toggle("near",d<950&&d>-100)});
+$("#pg i").style.height=cam/MAX*100+"%";raf=requestAnimationFrame(loop)}
+function setLite(b){document.body.classList.toggle("lite",b);$("#md").textContent=b?"Mode galerie":"Mode simple";try{localStorage.setItem("lite",b?"1":"0")}catch(e){}cancelAnimationFrame(raf);if(!b){last=performance.now();raf=requestAnimationFrame(loop)}}
+let sv=null;try{sv=localStorage.getItem("lite")}catch(e){}
+setLite(sv=="1"||(sv===null&&(matchMedia("(prefers-reduced-motion:reduce)").matches||(navigator.hardwareConcurrency||4)<=2)));
+</script></body></html>
