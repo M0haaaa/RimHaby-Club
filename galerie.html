@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
 <title>RIMHABY CLUB · Galerie</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#d9bf8c;--rose:#e8b9c4;--ink:#1a1416;color-scheme:dark}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;height:100%;overflow:hidden;background:#070607;font:14px Inter,system-ui,sans-serif;color:#f4ede4;overscroll-behavior:none}
+html,body{margin:0;height:100%;overflow:hidden;background:#070607;font:14px Inter,system-ui,sans-serif;color:#f4ede4;overscroll-behavior:none;touch-action:none}
 #vp{position:fixed;inset:0;perspective:720px;touch-action:none;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#2b2024,#050405 75%)}
 #vp:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 35%,#000b 100%)}
 #w{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
@@ -32,7 +32,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#070607;font:14px Inte
 #hint{bottom:calc(92px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#f4ede4cc;font-size:11px;letter-spacing:.2em;text-transform:uppercase;transition:opacity .8s}
 #pg{right:12px;top:50%;height:120px;width:2px;margin-top:-60px;background:#ffffff33}#pg i{display:block;width:100%;background:var(--gold);height:0}
 #md{position:fixed;left:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;border:1px solid #d9bf8c66;background:#000a;color:var(--gold);border-radius:99px;padding:8px 14px;font:12px Inter,sans-serif;cursor:pointer}
-#lite{display:none;position:fixed;inset:0;overflow:auto;padding:70px 20px 90px;background:#0a0809}
+#lite{display:none;position:fixed;inset:0;overflow:auto;touch-action:pan-y;padding:70px 20px 90px;background:#0a0809}
 #lite a{display:block;margin-bottom:14px;padding:22px;border-radius:18px;border:1px solid #d9bf8c55;background:var(--bg);color:#fff;text-decoration:none;font:500 24px 'Playfair Display',serif}
 body.lite #lite{display:block}body.lite #vp,body.lite #pg,body.lite #hint{display:none}
 #iris{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;clip-path:circle(0 at 50% 50%);visibility:hidden;transition:clip-path .9s cubic-bezier(.7,0,.2,1)}
@@ -46,6 +46,7 @@ body.lite #lite{display:block}body.lite #vp,body.lite #pg,body.lite #hint{displa
 <div id="iris"><div></div></div>
 <script>
 const $=s=>document.querySelector(s),vp=$("#vp"),W=$("#w");
+["gesturestart","gesturechange","gestureend"].forEach(t=>document.addEventListener(t,e=>e.preventDefault()));document.addEventListener("touchmove",e=>{if(e.touches.length>1)e.preventDefault()},{passive:false});
 const S={crown:'<path d="M20 80l8-30 14 18 8-26 8 26 14-18 8 30z" fill="url(#gg)"/><rect x="20" y="84" width="60" height="8" fill="url(#gg)"/>',
 gift:'<rect x="25" y="60" width="50" height="40" fill="url(#gg)"/><rect x="45" y="60" width="10" height="40" fill="#e8b9c4"/><path d="M50 60c-14-22-26-6-14 0zM50 60c14-22 26-6 14 0z" fill="none" stroke="url(#gg)" stroke-width="4"/>',
 cup:'<path d="M32 40h36v18a18 18 0 0 1-36 0z" fill="url(#gg)"/><rect x="46" y="74" width="8" height="14" fill="url(#gg)"/><rect x="34" y="88" width="32" height="8" rx="2" fill="url(#gg)"/>',
@@ -74,9 +75,9 @@ const stopFor=i=>F[i].s?F[i].z-560:F[i].z-720;
 let cam=0,vel=0,drag=0,py=0,pt=0,mv=0,li=0,gl=null,last=performance.now(),raf=0;
 $("#hint").textContent=matchMedia("(pointer:coarse)").matches?"Glisse vers le haut pour avancer":"Molette pour avancer";
 const hideHint=()=>$("#hint").style.opacity=0;
-vp.addEventListener("pointerdown",e=>{drag=1;py=e.clientY;pt=li=performance.now();mv=0;vel=0;gl=null;vp.setPointerCapture(e.pointerId)});
-vp.addEventListener("pointermove",e=>{if(!drag)return;const n=performance.now(),dy=(py-e.clientY)*1.7,dt=Math.max(8,n-pt);cam+=dy;mv+=Math.abs(dy);vel=Math.max(-70,Math.min(70,vel*.6+dy/dt*16.67*.4));py=e.clientY;pt=li=n;hideHint()});
-vp.addEventListener("pointerup",e=>{drag=0;if(mv<14){const x=document.elementFromPoint(e.clientX,e.clientY),el=x&&x.closest(".fr");if(el)tap(+el.dataset.i)}if(performance.now()-pt>90)vel=0});
+vp.addEventListener("pointerdown",e=>{if(!e.isPrimary){drag=0;return}drag=1;py=e.clientY;pt=li=performance.now();mv=0;vel=0;gl=null;vp.setPointerCapture(e.pointerId)});
+vp.addEventListener("pointermove",e=>{if(!drag||!e.isPrimary)return;const n=performance.now(),dy=(py-e.clientY)*1.7,dt=Math.max(8,n-pt);cam+=dy;mv+=Math.abs(dy);vel=Math.max(-70,Math.min(70,vel*.6+dy/dt*16.67*.4));py=e.clientY;pt=li=n;hideHint()});
+vp.addEventListener("pointerup",e=>{drag=0;if(mv<14){const x=document.elementFromPoint(e.clientX,e.clientY),el=x&&x.closest(".fr");if(el)tap(+el.dataset.i)}if(performance.now()-pt>90||Math.abs(vel)<3)vel=0});
 vp.addEventListener("pointercancel",()=>drag=0);
 vp.addEventListener("wheel",e=>{e.preventDefault();vel=Math.max(-70,Math.min(70,vel+e.deltaY*.05));li=performance.now();gl=null;hideHint()},{passive:false});
 addEventListener("keydown",e=>{if(e.key=="ArrowUp"||e.key=="ArrowDown"){vel+=e.key=="ArrowUp"?14:-14;li=performance.now();gl=null;hideHint()}});
@@ -86,8 +87,8 @@ requestAnimationFrame(()=>requestAnimationFrame(()=>ir.style.clipPath="circle(15
 addEventListener("pageshow",()=>{const ir=$("#iris");ir.classList.remove("on");ir.style.clipPath=""});
 function loop(n){const k=Math.min(3,(n-last)/16.67||1);last=n;
 if(!drag){if(gl!=null){vel=(gl-cam)*.07;if(Math.abs(gl-cam)<1.5)gl=null}
-else if(Math.abs(vel)<2&&n-li>700){let b=STOPS[0];STOPS.forEach(s=>{if(Math.abs(s-cam)<Math.abs(b-cam))b=s});if(Math.abs(b-cam)<300)vel=(b-cam)*.07;else vel*=Math.pow(.9,k)}
-else vel*=Math.pow(.95,k);cam+=vel*k}
+else{vel*=Math.pow(.93,k);if(Math.abs(vel)<.05)vel=0}
+cam+=vel*k}
 if(cam<0){cam=0;vel=0}if(cam>MAX){cam=MAX;vel=0}
 W.style.transform="translate3d(0,"+Math.sin(cam/70)*2.5+"px,"+cam+"px)";
 F.forEach(f=>{const d=f.z-cam;f.e.style.setProperty("--l",Math.max(.08,1-Math.abs(d-560)/1100).toFixed(2));f.e.style.setProperty("--t",Math.max(0,Math.min(1,(1250-d)/650)).toFixed(2));f.e.classList.toggle("near",d<950&&d>-100)});
